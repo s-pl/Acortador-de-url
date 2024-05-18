@@ -16,10 +16,11 @@ Este es un servicio simple de acortamiento de URLs construido con Node.js, Expre
 
 ## Dependencias
 
-- [Express](https://www.npmjs.com/package/express): Framework web rápido, sin opiniones y minimalista para Node.js.
-- [SQLite3](https://www.npmjs.com/package/sqlite3): Enlaces asincrónicos y no bloqueantes de SQLite3 para Node.js.
-- [Validator](https://www.npmjs.com/package/validator): Una biblioteca de validadores y sanitizadores de cadenas.
-
+- [Express](https://www.npmjs.com/package/express):
+- [SQLite3](https://www.npmjs.com/package/sqlite3): 
+- [Validator](https://www.npmjs.com/package/validator): 
+## Ejemplo de uso
+- [Render](https://acortador-de-url.onrender.com/)
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
