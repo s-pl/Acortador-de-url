@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">URL Shortener</h1>
+
+        <form id="shorten-form" class="space-y-4">
+            <div>
+                <label for="url" class="block text-sm font-medium text-gray-700">Enter URL to shorten:</label>
+                <input type="url" id="url" name="url" required 
+                    class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <button type="submit" 
+                class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md font-semibold transition">Shorten URL</button>
+        </form>
+
+        <div id="result" class="mt-6 hidden">
+            <p class="text-sm text-gray-700">Shortened URL:</p>
+            <a id="short-url" href="#" class="text-blue-500 hover:underline break-all"></a>
+        </div>
+    </div>
+
+    
+    <div class="absolute bottom-4 left-4 flex items-center space-x-4">
+        <h5>Created with: </h5>
+        <img src="https://www.vectorlogo.zone/logos/nodejs/nodejs-icon.svg" alt="Node.js Logo" class="h-8 w-8">
+        <img src="https://www.svgrepo.com/show/303460/redis-logo.svg" alt="Redis Logo" class="h-8 w-8 bg-red-500 rounded-full">
+        <h5> by <a href="https://github.com/s-pl">samuel</a> </h5>
+    </div>
+
+    <script>
+        document.getElementById('shorten-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const url = document.getElementById('url').value;
+
+            try {
+                const response = await fetch('/cut', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ urlToCut: url })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    const resultDiv = document.getElementById('result');
+                    const shortUrlAnchor = document.getElementById('short-url');
+
+                    shortUrlAnchor.textContent = `${data.success}`;
+                    shortUrlAnchor.href = `${data.success}`;
+                    resultDiv.classList.remove('hidden');
+                } else {
+                    alert(data.error);
+                }
+            } catch (err) {
+                console.error(err);
+                alert(err);
+            }
+        });
+    </script>
+</body>
+</html>
